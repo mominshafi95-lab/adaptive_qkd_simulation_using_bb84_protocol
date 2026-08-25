@@ -1,0 +1,8 @@
+qiskit
+qiskit-aer
+numpy
+matplotlib
+seaborn
+qiskit-ibm-runtime
+flask
+pycryptodome
