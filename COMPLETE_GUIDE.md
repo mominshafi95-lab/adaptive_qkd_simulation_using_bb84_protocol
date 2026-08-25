@@ -1,19 +1,5 @@
 # 🔐 BB84 Adaptive QKD Framework - Complete Beginner's Guide
 
-## QUICK START (Copy & Paste)
-
-```bash
-# Step 1: Navigate to project
-cd "c:\Users\momin\Sem 8\BB84_Adaptive_QKD"
-
-# Step 2: Run the project
-python main.py
-
-# Step 3: Select an option (e.g., type "1" and press Enter)
-```
-
----
-
 ## WHAT IS THIS PROJECT?
 
 ### **Simple Explanation**
@@ -181,7 +167,7 @@ BB84_Adaptive_QKD/          ← Main folder
 # 1. Open PowerShell or CMD
 
 # 2. Navigate to project
-cd "c:\Users\momin\Sem 8\BB84_Adaptive_QKD"
+cd "c:\xxx\BB84_Adaptive_QKD"
 
 # 3. Run main.py
 python main.py
@@ -220,7 +206,7 @@ python main.py
 # 1. Open PowerShell
 
 # 2. Navigate to project
-cd "c:\Users\momin\Sem 8\BB84_Adaptive_QKD"
+cd "c:\xxx\BB84_Adaptive_QKD"
 
 # 3. Start web server
 python web/app.py
@@ -239,7 +225,7 @@ python web/app.py
 
 ```bash
 # Run just option 1:
-cd "c:\Users\momin\Sem 8\BB84_Adaptive_QKD"
+cd "c:\xxx\BB84_Adaptive_QKD"
 python -c "from experiments.noise_sweep import run_noise_sweep; run_noise_sweep()"
 
 # Run just option 8 (secure communication):
@@ -285,42 +271,6 @@ Data Points:
 
 ---
 
-## HOW TO EXPLAIN TO OTHERS
-
-### **To Your Non-Technical Friends:**
-
-**"It's like a quantum version of a secret handshake. Two people create a secret code that:"**
-1. **Can't be copied** - the quantum physics prevents it
-2. **Detects spies** - if someone tries to listen, it breaks
-3. **Creates unbreakable keys** - for encrypting messages
-
-**Analogy:** "Imagine you send a message written in invisible ink, but if anyone else shines a light on it, the message automatically changes. The spy gets caught red-handed!"
-
----
-
-### **To Technical People:**
-
-**"BB84 (Bennett-Brassard 1984) is a QKD protocol that:"**
-1. Uses two random bases (rectilinear ⊕ diagonal ⊗) for encoding
-2. Achieves theoretical unconditional security via quantum mechanics
-3. Detects eavesdropping via increased QBER
-4. This implementation includes:
-   - Noise modeling (depolarizing channels)
-   - Error correction (syndrome decoding)
-   - Privacy amplification (universal hashing/SHA256)
-   - Finite-key analysis
-   - Attack simulations (intercept-resend, PNS, Trojan horse)
-   - 8-qubit quantum simulator (Qiskit-Aer)
-
-**Key metrics:**
-- QBER: Quantum Bit Error Rate (should be ~3.73% for no eavesdropping)
-- Secret Key Rate: Final bits per transmission
-- Information Leakage: Eve's mutual information (should be < 0.001 bits)
-
----
-
-### **To Professors/Students:**
-
 **"This project demonstrates:"**
 
 1. **Quantum Cryptography**: How quantum mechanics enables unbreakable encryption
@@ -330,13 +280,6 @@ Data Points:
 5. **Signal Processing**: QBER calculation, statistical analysis
 6. **Security Analysis**: Formal proofs of unconditional security
 
-**Academic significance:**
-- Proves no-cloning theorem (Eve can't copy quantum states)
-- Demonstrates quantum advantage (impossible classically)
-- Finite-key analysis (practical security bounds)
-- Implementation of NIST-recommended protocols
-
----
 
 ## TYPICAL RUNNING TIMES
 
@@ -354,107 +297,3 @@ Data Points:
 | 10 | Randomness Analysis | 20-30s | Low-Moderate |
 | 11 | Statistical Analysis | 50-70s | High |
 | 12 | GUI Launch | Instant | Low |
-
----
-
-## FILES YOU'LL ACTUALLY USE
-
-**You DON'T need to edit:**
-- core/ files (they're complete)
-- experiments/ files (they're complete)
-
-**You MIGHT customize:**
-- `main.py` - change menu options
-- `experiments/noise_sweep.py` - change noise levels to test
-- Print statements - add more output
-
-**Files that matter most:**
-1. **main.py** - Entry point
-2. **core/bb84_engine.py** - Core algorithm
-3. **experiments/** - What you want to demonstrate
-4. **utils/visualization.py** - How results are displayed
-
----
-
-## COMMON QUESTIONS ANSWERED
-
-### **Q: "Will this work without quantum hardware?"**
-**A:** Yes! This uses a **quantum simulator** (Qiskit-Aer). It simulates quantum behavior on regular computers. Perfect for learning!
-
-### **Q: "How long do experiments take?"**
-**A:** 10 seconds to 70 seconds depending on the option. See table above.
-
-### **Q: "Can I modify the experiments?"**
-**A:** Absolutely! Try:
-- Change noise levels in noise_sweep.py
-- Change number of runs in monte_carlo.py
-- Adjust qubit count (but more means slower)
-
-### **Q: "What does '8 qubits' mean?"**
-**A:** The simulator uses 8 quantum bits. More qubits = more powerful but slower. We use 8 (2^8 = 256 states) instead of 16+ for speed.
-
-### **Q: "Is this real quantum cryptography?"**
-**A:** It's a **realistic simulation** of actual QKD. Real hardware uses photons/atoms instead of classical simulation.
-
-### **Q: "Can this be hacked?"**
-**A:** **Theoretically NO** - the math proves it. **Practically** - in real hardware, implementation flaws exist (side-channels, etc.). This has **no such flaws** by design.
-
----
-
-## QUICK DEMO SCRIPT (For Presentations)
-
-```bash
-# Show your friends this quick demo:
-
-cd "c:\Users\momin\Sem 8\BB84_Adaptive_QKD"
-python main.py
-
-# Select: 3 (Attack Analysis - fastest, most impressive)
-# Wait 15 seconds
-# Show output: "QBER doubles when Eve eavesdrops!"
-
-# Then select: 8 (Secure Communication)
-# Wait 10 seconds  
-# Show: "Generated key used to encrypt a message"
-
-# Then select: 0 (Exit)
-```
-
-**People will be impressed by:** "Unbreakable encryption using quantum physics!" 🎉
-
----
-
-## RESOURCES FOR LEARNING MORE
-
-**Understand BB84 Better:**
-- Bennett & Brassard (1984) original paper
-- Wikipedia: Quantum key distribution
-- YouTube: "BB84 explained" (videos available)
-
-**Understand Qiskit:**
-- qiskit.org (official docs)
-- IBM Quantum Experience (free cloud quantum computer)
-
-**Understand Security:**
-- Information theory basics
-- Mutual information concept
-- One-time pad theory
-
----
-
-## FINAL CHECKLIST
-
-- ✅ Project is fully set up
-- ✅ All 26 modules are functional
-- ✅ 12 experiment options work
-- ✅ Web interface is optional
-- ✅ Terminal interface is primary
-- ✅ All output is text-based (no blank graphs)
-- ✅ Memory issues fixed (8-qubit version)
-- ✅ Ready for demonstration/presentation
-
----
-
-**YOU'RE ALL SET! 🚀**
-
-Start with: `python main.py` and select option 1 or 3!
