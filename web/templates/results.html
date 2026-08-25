@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - BB84 Adaptive QKD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">📊 Configuration & Status</h1>
+                <p class="subtitle">Current experimental setup and system status</p>
+            </div>
+            <nav class="nav">
+                <a href="/" class="nav-link">Experiments</a>
+                <a href="/configuration" class="nav-link">Configuration</a>
+                <a href="/results" class="nav-link active">Results</a>
+                <a href="/documentation" class="nav-link">Documentation</a>
+                <a href="/about" class="nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Current Configuration Summary -->
+            <section class="experiment-section">
+                <h2 class="section-title">⚙️ Current Configuration Summary</h2>
+                <div class="config-summary" id="configSummary">
+                    <p style="text-align: center;">Loading configuration...</p>
+                </div>
+            </section>
+
+            <!-- Quick Stats -->
+            <section class="experiment-section">
+                <h2 class="section-title">📈 Expected Performance</h2>
+                <div class="stats-grid" id="statsGrid">
+                    <div style="text-align: center; padding: 20px;">
+                        <p>Loading performance estimates...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experiment Status -->
+            <section class="experiment-section">
+                <h2 class="section-title">🔬 Experiment Compatibility</h2>
+                <div class="experiments-status" id="experimentsStatus">
+                    <p style="text-align: center;">Loading experiment status...</p>
+                </div>
+            </section>
+
+            <!-- Tips & Recommendations -->
+            <section class="experiment-section">
+                <h2 class="section-title">💡 Tips & Recommendations</h2>
+                <div class="tips-container" id="tipsContainer">
+                    <div class="tip-item">
+                        <h3>⚡ For Quick Demos</h3>
+                        <p>Use "Fast & Simple" preset (4 qubits, 5 levels) - Takes only 5-10 seconds per experiment</p>
+                    </div>
+                    <div class="tip-item">
+                        <h3>🎓 For Learning</h3>
+                        <p>Use "Balanced" preset (8 qubits, 10 levels) - Good balance of quality and speed (30-45 seconds)</p>
+                    </div>
+                    <div class="tip-item">
+                        <h3>📊 For Research</h3>
+                        <p>Use "Detailed" or "Comprehensive" presets - High quality results, takes 1-5 minutes</p>
+                    </div>
+                    <div class="tip-item">
+                        <h3>🔐 For Security Analysis</h3>
+                        <p>Enable all attacks and run "Advanced Attack Demo" - See how protocol detects eavesdropping</p>
+                    </div>
+                    <div class="tip-item">
+                        <h3>💾 Configuration Workflow</h3>
+                        <p>Save your favorite configurations - Load them instantly for consistent, reproducible experiments</p>
+                    </div>
+                    <div class="tip-item">
+                        <h3>📊 Compare Results</h3>
+                        <p>Run the same experiment with different presets - See how qubits and noise affect QBER</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Performance Table -->
+            <section class="experiment-section">
+                <h2 class="section-title">⏱️ Performance Reference</h2>
+                <div class="performance-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Configuration</th>
+                                <th>Qubits</th>
+                                <th>Noise Levels</th>
+                                <th>MC Runs</th>
+                                <th>Estimated Time</th>
+                                <th>Quality</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: #e8f5e9;">
+                                <td><strong>Fast & Simple</strong></td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>50</td>
+                                <td>5-10 seconds</td>
+                                <td>⚡ Demo</td>
+                            </tr>
+                            <tr style="background: #e3f2fd;">
+                                <td><strong>Balanced</strong></td>
+                                <td>8</td>
+                                <td>10</td>
+                                <td>200</td>
+                                <td>30-45 seconds</td>
+                                <td>✓ Standard</td>
+                            </tr>
+                            <tr style="background: #fff3e0;">
+                                <td><strong>Detailed</strong></td>
+                                <td>8</td>
+                                <td>20</td>
+                                <td>200</td>
+                                <td>1-2 minutes</td>
+                                <td>✓✓ Good</td>
+                            </tr>
+                            <tr style="background: #f3e5f5;">
+                                <td><strong>Comprehensive</strong></td>
+                                <td>12</td>
+                                <td>15</td>
+                                <td>300</td>
+                                <td>3-5 minutes</td>
+                                <td>✓✓✓ Research</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="experiment-section">
+                <h2 class="section-title">🎯 Quick Actions</h2>
+                <div class="quick-actions">
+                    <a href="/configuration" class="action-card">
+                        <div class="action-icon">⚙️</div>
+                        <div class="action-text">
+                            <h3>Adjust Configuration</h3>
+                            <p>Change parameters, apply presets, or load saved configurations</p>
+                        </div>
+                        <div class="action-arrow">→</div>
+                    </a>
+                    <a href="/" class="action-card">
+                        <div class="action-icon">🧪</div>
+                        <div class="action-text">
+                            <h3>Run Experiments</h3>
+                            <p>Execute experiments with current configuration</p>
+                        </div>
+                        <div class="action-arrow">→</div>
+                    </a>
+                    <a href="/documentation" class="action-card">
+                        <div class="action-icon">📖</div>
+                        <div class="action-text">
+                            <h3>Learn More</h3>
+                            <p>Detailed documentation for all experiments</p>
+                        </div>
+                        <div class="action-arrow">→</div>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadConfigurationSummary();
+            loadPerformanceStats();
+            loadExperimentsStatus();
+        });
+
+        function loadConfigurationSummary() {
+            fetch('/api/config/current')
+                .then(r => r.json())
+                .then(config => {
+                    let html = `
+                        <div class="config-details">
+                            <div class="config-section">
+                                <h3>🔬 Quantum System</h3>
+                                <div class="detail-row">
+                                    <span class="label">Qubits:</span>
+                                    <span class="value">${config.quantum.num_qubits}</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">Bases:</span>
+                                    <span class="value">${config.quantum.num_bases}</span>
+                                </div>
+                            </div>
+
+                            <div class="config-section">
+                                <h3>📊 Noise Settings</h3>
+                                <div class="detail-row">
+                                    <span class="label">Noise Range:</span>
+                                    <span class="value">${(config.noise.min_noise*100).toFixed(1)}% - ${(config.noise.max_noise*100).toFixed(1)}%</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">Noise Levels:</span>
+                                    <span class="value">${config.noise.noise_levels}</span>
+                                </div>
+                            </div>
+
+                            <div class="config-section">
+                                <h3>🏃 Simulation</h3>
+                                <div class="detail-row">
+                                    <span class="label">Monte Carlo Runs:</span>
+                                    <span class="value">${config.simulation.monte_carlo_runs}</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">Statistical Runs:</span>
+                                    <span class="value">${config.simulation.statistical_runs}</span>
+                                </div>
+                            </div>
+
+                            <div class="config-section">
+                                <h3>🔐 Security</h3>
+                                <div class="detail-row">
+                                    <span class="label">QBER Threshold:</span>
+                                    <span class="value">${(config.security.qber_threshold*100).toFixed(2)}%</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">Honest QBER:</span>
+                                    <span class="value">${(config.security.honest_qber*100).toFixed(2)}%</span>
+                                </div>
+                            </div>
+
+                            <div class="config-section">
+                                <h3>⚔️ Attacks Enabled</h3>
+                                <div class="detail-row">
+                                    <span class="label">PNS Attack:</span>
+                                    <span class="value">${config.attacks.enable_pns_attack ? '✓ Yes' : '✗ No'}</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">Intercept-Resend:</span>
+                                    <span class="value">${config.attacks.enable_intercept_resend ? '✓ Yes' : '✗ No'}</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="label">Trojan Horse:</span>
+                                    <span class="value">${config.attacks.enable_trojan_horse ? '✓ Yes' : '✗ No'}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('configSummary').innerHTML = html;
+                })
+                .catch(err => console.error('Error loading config:', err));
+        }
+
+        function loadPerformanceStats() {
+            fetch('/api/config/current')
+                .then(r => r.json())
+                .then(config => {
+                    // Calculate estimated time
+                    const qubits = config.quantum.num_qubits;
+                    const levels = config.noise.noise_levels;
+                    const runs = config.simulation.monte_carlo_runs;
+                    
+                    // Rough estimate: ~1-2ms per qubit per run
+                    const timeSeconds = (qubits * levels * runs * 0.002) + 5;
+                    const timeMins = timeSeconds / 60;
+                    
+                    let timeStr = timeSeconds < 60 ? `${timeSeconds.toFixed(0)}s` : `${timeMins.toFixed(1)}m`;
+
+                    let html = `
+                        <div class="stats-cards">
+                            <div class="stat-card">
+                                <div class="stat-icon">⚡</div>
+                                <div class="stat-content">
+                                    <div class="stat-label">Estimated Time</div>
+                                    <div class="stat-value">${timeStr}</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🔢</div>
+                                <div class="stat-content">
+                                    <div class="stat-label">Total Simulations</div>
+                                    <div class="stat-value">${levels}</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">📊</div>
+                                <div class="stat-content">
+                                    <div class="stat-label">Data Points</div>
+                                    <div class="stat-value">${(levels * runs).toLocaleString()}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('statsGrid').innerHTML = html;
+                })
+                .catch(err => console.error('Error loading stats:', err));
+        }
+
+        function loadExperimentsStatus() {
+            let html = `
+                <div class="exp-status-list">
+                    <div class="exp-status-item">
+                        <span class="exp-icon">📊</span>
+                        <span class="exp-name">Noise Sweep</span>
+                        <span class="exp-status-badge ready">✓ Ready</span>
+                    </div>
+                    <div class="exp-status-item">
+                        <span class="exp-icon">🎲</span>
+                        <span class="exp-name">Monte Carlo</span>
+                        <span class="exp-status-badge ready">✓ Ready</span>
+                    </div>
+                    <div class="exp-status-item">
+                        <span class="exp-icon">🛡️</span>
+                        <span class="exp-name">Attack Analysis</span>
+                        <span class="exp-status-badge ready">✓ Ready</span>
+                    </div>
+                    <div class="exp-status-item">
+                        <span class="exp-icon">🔐</span>
+                        <span class="exp-name">Security Deep Dive</span>
+                        <span class="exp-status-badge ready">✓ Ready</span>
+                    </div>
+                    <div class="exp-status-item">
+                        <span class="exp-icon">🔧</span>
+                        <span class="exp-name">Error Correction</span>
+                        <span class="exp-status-badge ready">✓ Ready</span>
+                    </div>
+                    <div class="exp-status-item">
+                        <span class="exp-icon">🎭</span>
+                        <span class="exp-name">Decoy State</span>
+                        <span class="exp-status-badge ready">✓ Ready</span>
+                    </div>
+                    <div class="exp-status-item">
+                        <span class="exp-icon">🔒</span>
+                        <span class="exp-name">Privacy Amplification</span>
+                        <span class="exp-status-badge ready">✓ Ready</span>
+                    </div>
+                    <div class="exp-status-item">
+                        <span class="exp-icon">💬</span>
+                        <span class="exp-name">Secure Communication</span>
+                        <span class="exp-status-badge ready">✓ Ready</span>
+                    </div>
+                    <div class="exp-status-item">
+                        <span class="exp-icon">⚔️</span>
+                        <span class="exp-name">Advanced Attacks</span>
+                        <span class="exp-status-badge ready">✓ Ready</span>
+                    </div>
+                    <div class="exp-status-item">
+                        <span class="exp-icon">🎰</span>
+                        <span class="exp-name">Randomness Analysis</span>
+                        <span class="exp-status-badge ready">✓ Ready</span>
+                    </div>
+                    <div class="exp-status-item">
+                        <span class="exp-icon">📈</span>
+                        <span class="exp-name">Statistical Analysis</span>
+                        <span class="exp-status-badge ready">✓ Ready</span>
+                    </div>
+                </div>
+            `;
+            document.getElementById('experimentsStatus').innerHTML = html;
+        }
+    </script>
+
+    <style>
+        .config-summary {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .config-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .config-section {
+            border-left: 4px solid #4CAF50;
+            padding-left: 15px;
+        }
+
+        .config-section h3 {
+            margin: 0 0 12px 0;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-row .label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .detail-row .value {
+            font-weight: 700;
+            color: #4CAF50;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 2.5em;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .tips-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .tip-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+            padding: 15px;
+        }
+
+        .tip-item h3 {
+            margin: 0 0 8px 0;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .tip-item p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .performance-table {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        .performance-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .performance-table th {
+            background: #f5f5f5;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .performance-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .performance-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .action-card {
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            border-color: #4CAF50;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .action-icon {
+            font-size: 2em;
+        }
+
+        .action-text h3 {
+            margin: 0 0 5px 0;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .action-text p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .action-arrow {
+            margin-left: auto;
+            font-size: 1.5em;
+            color: #4CAF50;
+        }
+
+        .exp-status-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .exp-status-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .exp-icon {
+            font-size: 1.3em;
+        }
+
+        .exp-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .exp-status-badge {
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .exp-status-badge.ready {
+            background: #d4edda;
+            color: #155724;
+        }
+    </style>
+</body>
+</html>

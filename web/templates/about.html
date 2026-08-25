@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - BB84 Adaptive QKD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">🔐 BB84 Adaptive QKD Framework</h1>
+                <p class="subtitle">Quantum Key Distribution Simulation & Analysis Platform</p>
+            </div>
+            <nav class="nav">
+                <a href="/" class="nav-link">Experiments</a>
+                <a href="/configuration" class="nav-link">Configuration</a>
+                <a href="/results" class="nav-link">Results</a>
+                <a href="/documentation" class="nav-link">Documentation</a>
+                <a href="/about" class="nav-link active">About</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- About Section -->
+            <section class="about-section">
+                <h2>About This Project</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>🎯 Project Overview</h3>
+                        <p>
+                            The BB84 Adaptive QKD Framework is a comprehensive simulation and analysis platform for 
+                            quantum key distribution (QKD) protocols. Built with cutting-edge quantum computing libraries 
+                            (Qiskit), this framework provides researchers and students with tools to explore, analyze, 
+                            and understand the intricacies of quantum cryptography.
+                        </p>
+
+                        <h3>🔬 Core Features</h3>
+                        <ul class="feature-list">
+                            <li><strong>BB84 Protocol:</strong> Classical quantum key distribution with adaptive noise handling</li>
+                            <li><strong>Decoy State Protocol:</strong> Enhanced security against photon number splitting attacks</li>
+                            <li><strong>Error Correction:</strong> Advanced reconciliation algorithms for noisy channels</li>
+                            <li><strong>Privacy Amplification:</strong> XOR-based and SHA256-based key compression</li>
+                            <li><strong>Finite Key Analysis:</strong> Practical security bounds with limited resources</li>
+                            <li><strong>Attack Simulation:</strong> Intercept-resend and photon number splitting attacks</li>
+                            <li><strong>Channel Modeling:</strong> Realistic noise and loss simulations</li>
+                            <li><strong>Information Theory:</strong> Thermodynamic entropy and mutual information calculations</li>
+                        </ul>
+
+                        <h3>📊 Simulation Capabilities</h3>
+                        <p>
+                            The framework uses Qiskit's AerSimulator with depolarizing noise models to faithfully 
+                            reproduce quantum channel characteristics. Experiments run on 16-qubit circuits optimized 
+                            for standard computing hardware.
+                        </p>
+
+                        <h3>🛡️ Security Analysis</h3>
+                        <p>
+                            Comprehensive security assessment tools including:
+                        </p>
+                        <ul class="feature-list">
+                            <li>Quantum bit error rate (QBER) analysis</li>
+                            <li>Information leakage quantification</li>
+                            <li>Secret key rate calculation</li>
+                            <li>Asymptotic and finite-key security bounds</li>
+                            <li>Attack success probability estimation</li>
+                        </ul>
+
+                        <h3>🎓 Educational Value</h3>
+                        <p>
+                            Perfect for students and researchers learning about:
+                        </p>
+                        <ul class="feature-list">
+                            <li>Quantum mechanics and quantum computing fundamentals</li>
+                            <li>Cryptography and information security</li>
+                            <li>Quantum information theory</li>
+                            <li>Statistical analysis and signal processing</li>
+                            <li>Protocol implementation and optimization</li>
+                        </ul>
+                    </div>
+
+                    <!-- Tech Stack Box -->
+                    <div class="tech-stack">
+                        <h3>🛠️ Technology Stack</h3>
+                        <div class="tech-items">
+                            <div class="tech-item">
+                                <span class="tech-icon">⚛️</span>
+                                <span class="tech-name">Qiskit</span>
+                                <span class="tech-version">2.3.0+</span>
+                            </div>
+                            <div class="tech-item">
+                                <span class="tech-icon">🔧</span>
+                                <span class="tech-name">Qiskit-Aer</span>
+                                <span class="tech-version">0.17.2+</span>
+                            </div>
+                            <div class="tech-item">
+                                <span class="tech-icon">🐍</span>
+                                <span class="tech-name">Python</span>
+                                <span class="tech-version">3.8+</span>
+                            </div>
+                            <div class="tech-item">
+                                <span class="tech-icon">🌐</span>
+                                <span class="tech-name">Flask</span>
+                                <span class="tech-version">3.0+</span>
+                            </div>
+                            <div class="tech-item">
+                                <span class="tech-icon">📊</span>
+                                <span class="tech-name">NumPy</span>
+                                <span class="tech-version">Latest</span>
+                            </div>
+                            <div class="tech-item">
+                                <span class="tech-icon">🔐</span>
+                                <span class="tech-name">PyCryptodome</span>
+                                <span class="tech-version">Latest</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section">
+                <h2>Project Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">26</div>
+                        <div class="stat-label">Core Modules</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">11</div>
+                        <div class="stat-label">Experiments</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">16</div>
+                        <div class="stat-label">Qubits Simulated</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Attack Types</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Getting Started Section -->
+            <section class="getting-started-section">
+                <h2>🚀 Getting Started</h2>
+                <div class="getting-started-content">
+                    <h3>Installation</h3>
+                    <pre><code>pip install -r requirements.txt</code></pre>
+
+                    <h3>Quick Start</h3>
+                    <p>Select any experiment from the <strong>Experiments</strong> tab to run it immediately. 
+                    Results will be displayed in real-time with comprehensive output.</p>
+
+                    <h3>Explore the Framework</h3>
+                    <ul class="feature-list">
+                        <li>Run basic experiments to understand BB84 mechanics</li>
+                        <li>Analyze core systems like error correction and privacy amplification</li>
+                        <li>Explore advanced features including attack simulations</li>
+                        <li>Review detailed documentation for each component</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 BB84 Adaptive QKD Framework | Quantum Key Distribution Simulation</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

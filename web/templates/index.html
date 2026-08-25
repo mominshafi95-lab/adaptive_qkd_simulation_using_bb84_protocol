@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB84 Adaptive QKD - Quantum Key Distribution Framework</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">🔐 BB84 Adaptive QKD Framework</h1>
+                <p class="subtitle">Quantum Key Distribution Simulation & Analysis Platform</p>
+            </div>
+            <nav class="nav">
+                <a href="/" class="nav-link active">Experiments</a>
+                <a href="/configuration" class="nav-link">Configuration</a>
+                <a href="/results" class="nav-link">Results</a>
+                <a href="/documentation" class="nav-link">Documentation</a>
+                <a href="/about" class="nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- Loading Modal -->
+        <div id="loadingModal" class="modal">
+            <div class="modal-content loading">
+                <div class="spinner"></div>
+                <p>Running experiment...</p>
+            </div>
+        </div>
+
+        <!-- Results Modal -->
+        <div id="resultsModal" class="modal">
+            <div class="modal-content results">
+                <button class="close-btn" onclick="closeResults()">&times;</button>
+                <div class="results-header">
+                    <h2 id="resultsTitle"></h2>
+                    <div class="color-indicator" id="colorIndicator"></div>
+                </div>
+                <div class="results-body">
+                    <pre id="resultsOutput" class="output-pre"></pre>
+                </div>
+                <button class="btn-primary" onclick="closeResults()">Close Results</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Section: Basic Experiments -->
+            <section class="experiment-section">
+                <h2 class="section-title">📊 Basic Experiments</h2>
+                <div class="experiments-grid">
+                    {% for id, exp in experiments.items() %}
+                        {% if exp.category == "Basic Experiments" %}
+                            <div class="experiment-card" data-id="{{ id }}" style="border-top: 4px solid {{ exp.color }}">
+                                <div class="card-icon">{{ exp.icon }}</div>
+                                <h3 class="card-title">{{ exp.name }}</h3>
+                                <p class="card-description">{{ exp.description }}</p>
+                                <button class="btn-run" onclick="runExperiment('{{ id }}', '{{ exp.name }}', '{{ exp.color }}')" style="background: linear-gradient(135deg, {{ exp.color }}, {{ exp.color }}dd)">
+                                    Run Experiment
+                                </button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Section: Core Systems Analysis -->
+            <section class="experiment-section">
+                <h2 class="section-title">🔐 Core Systems Analysis</h2>
+                <div class="experiments-grid">
+                    {% for id, exp in experiments.items() %}
+                        {% if exp.category == "Core Systems Analysis" %}
+                            <div class="experiment-card" data-id="{{ id }}" style="border-top: 4px solid {{ exp.color }}">
+                                <div class="card-icon">{{ exp.icon }}</div>
+                                <h3 class="card-title">{{ exp.name }}</h3>
+                                <p class="card-description">{{ exp.description }}</p>
+                                <button class="btn-run" onclick="runExperiment('{{ id }}', '{{ exp.name }}', '{{ exp.color }}')" style="background: linear-gradient(135deg, {{ exp.color }}, {{ exp.color }}dd)">
+                                    Run Experiment
+                                </button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Section: Advanced Features -->
+            <section class="experiment-section">
+                <h2 class="section-title">⚡ Advanced Features</h2>
+                <div class="experiments-grid">
+                    {% for id, exp in experiments.items() %}
+                        {% if exp.category == "Advanced Features" %}
+                            <div class="experiment-card" data-id="{{ id }}" style="border-top: 4px solid {{ exp.color }}">
+                                <div class="card-icon">{{ exp.icon }}</div>
+                                <h3 class="card-title">{{ exp.name }}</h3>
+                                <p class="card-description">{{ exp.description }}</p>
+                                <button class="btn-run" onclick="runExperiment('{{ id }}', '{{ exp.name }}', '{{ exp.color }}')" style="background: linear-gradient(135deg, {{ exp.color }}, {{ exp.color }}dd)">
+                                    Run Experiment
+                                </button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 BB84 Adaptive QKD Framework | Quantum Key Distribution Simulation</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

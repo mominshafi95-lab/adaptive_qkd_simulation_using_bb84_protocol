@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - BB84 Adaptive QKD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">🔐 BB84 Adaptive QKD Framework</h1>
+                <p class="subtitle">Quantum Key Distribution Simulation & Analysis Platform</p>
+            </div>
+            <nav class="nav">
+                <a href="/" class="nav-link">Experiments</a>
+                <a href="/configuration" class="nav-link">Configuration</a>
+                <a href="/results" class="nav-link">Results</a>
+                <a href="/documentation" class="nav-link active">Documentation</a>
+                <a href="/about" class="nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Documentation Sections -->
+            <section class="documentation-section">
+                <h2>📖 Experiments Documentation</h2>
+
+                <!-- Basic Experiments -->
+                <div class="doc-category">
+                    <h3>📊 Basic Experiments</h3>
+                    
+                    <div class="doc-item">
+                        <h4>1. Noise Sweep Analysis</h4>
+                        <p><strong>Category:</strong> Performance Analysis</p>
+                        <p><strong>Description:</strong> Systematically varies noise levels in quantum channels and measures impact on key generation rates and QBER.</p>
+                        <p><strong>Parameters Tested:</strong> Depolarization noise from 0% to 20% in 2% increments</p>
+                        <p><strong>Output:</strong> CSV file with noise vs. key rate, QBER data; visualization plots</p>
+                    </div>
+
+                    <div class="doc-item">
+                        <h4>2. Monte Carlo Simulation</h4>
+                        <p><strong>Category:</strong> Statistical Analysis</p>
+                        <p><strong>Description:</strong> Runs multiple BB84 protocol instances with random initial states to compute statistical properties of generated keys.</p>
+                        <p><strong>Parameters:</strong> 100 protocol runs, 256 randomly initialized states</p>
+                        <p><strong>Output:</strong> Mean/std deviation of key rates, average QBER, success metrics</p>
+                    </div>
+
+                    <div class="doc-item">
+                        <h4>3. Attack Analysis</h4>
+                        <p><strong>Category:</strong> Security Assessment</p>
+                        <p><strong>Description:</strong> Simulates eavesdropping scenarios using intercept-resend strategy with measurement basis randomization.</p>
+                        <p><strong>Attack Types:</strong> Individual photon attacks, coordinated attacks</p>
+                        <p><strong>Output:</strong> Eavesdropper detection probability, information gained by Eve, protocol resilience</p>
+                    </div>
+
+                    <div class="doc-item">
+                        <h4>4. Statistical Analysis</h4>
+                        <p><strong>Category:</strong> Data Analysis</p>
+                        <p><strong>Description:</strong> Comprehensive statistical tests on generated keys including randomness, correlation, and entropy analysis.</p>
+                        <p><strong>Tests:</strong> Chi-square, t-tests, entropy calculation, autocorrelation</p>
+                        <p><strong>Output:</strong> Randomness quality metrics, statistical test results</p>
+                    </div>
+                </div>
+
+                <!-- Core Systems Analysis -->
+                <div class="doc-category">
+                    <h3>🔐 Core Systems Analysis</h3>
+
+                    <div class="doc-item">
+                        <h4>5. Security Deep Dive</h4>
+                        <p><strong>Category:</strong> Information Theory Analysis</p>
+                        <p><strong>Description:</strong> Detailed security analysis using information-theoretic bounds and finite-key analysis.</p>
+                        <p><strong>Metrics:</strong> Channel capacity, mutual information, secret key rate</p>
+                        <p><strong>Analysis:</strong> Asymptotic security, finite-key bounds, practical key rates</p>
+                        <p><strong>Output:</strong> Comprehensive security report with visualizations</p>
+                    </div>
+
+                    <div class="doc-item">
+                        <h4>6. Error Correction Demo</h4>
+                        <p><strong>Category:</strong> Channel Reliability</p>
+                        <p><strong>Description:</strong> Demonstrates error correction (reconciliation) algorithms to recover shared keys from noisy quantum channels.</p>
+                        <p><strong>Features:</strong> Syndrome decoding, LDPC codes simulation</p>
+                        <p><strong>Metrics:</strong> Correction success rate, information leakage, efficiency</p>
+                        <p><strong>Output:</strong> Before/after error rates, reconciliation overhead</p>
+                    </div>
+
+                    <div class="doc-item">
+                        <h4>7. Decoy State Analysis</h4>
+                        <p><strong>Category:</strong> Enhanced Security</p>
+                        <p><strong>Description:</strong> BB84 with decoy states to defend against photon number splitting attacks.</p>
+                        <p><strong>Features:</strong> Decoy state generation, security against PNS attacks</p>
+                        <p><strong>Parameters:</strong> Signal, decoy, vacuum state preparation</p>
+                        <p><strong>Output:</strong> Security improvement metrics, attack resilience analysis</p>
+                    </div>
+
+                    <div class="doc-item">
+                        <h4>8. Privacy Amplification</h4>
+                        <p><strong>Category:</strong> Key Compression & Purification</p>
+                        <p><strong>Description:</strong> Applies privacy amplification techniques to reduce any potential eavesdropper information.</p>
+                        <p><strong>Methods:</strong> XOR-based compression, SHA256 hashing</p>
+                        <p><strong>Impact:</strong> Reduces key material by ~50% while eliminating information leakage</p>
+                        <p><strong>Output:</strong> Key compression ratio, security improvement</p>
+                    </div>
+
+                    <div class="doc-item">
+                        <h4>9. Secure Communication End-to-End</h4>
+                        <p><strong>Category:</strong> Practical Implementation</p>
+                        <p><strong>Description:</strong> Complete integration of QKD-generated keys with AES encryption for secure message transmission.</p>
+                        <p><strong>Steps:</strong> Key generation → Privacy amplification → AES-256 encryption</p>
+                        <p><strong>Features:</strong> Message encryption/decryption, key schedule generation</p>
+                        <p><strong>Output:</strong> Encrypted/decrypted message demo, performance metrics</p>
+                    </div>
+                </div>
+
+                <!-- Advanced Features -->
+                <div class="doc-category">
+                    <h3>⚡ Advanced Features</h3>
+
+                    <div class="doc-item">
+                        <h4>10. Advanced Attack Scenarios</h4>
+                        <p><strong>Category:</strong> Security Testing</p>
+                        <p><strong>Description:</strong> Simulates multiple sophisticated attack strategies against the protocol.</p>
+                        <p><strong>Attack Strategies:</strong></p>
+                        <ul class="feature-list">
+                            <li>Intercept-Resend (IR): Direct measurement and resending</li>
+                            <li>Photon Number Splitting (PNS): Attacks on weak coherent pulses</li>
+                            <li>Trojan Horse (TH): Auxiliary quantum state injections</li>
+                        </ul>
+                        <p><strong>Metrics:</strong> Detection probability, Eve's mutual information, protocol security</p>
+                    </div>
+
+                    <div class="doc-item">
+                        <h4>11. Randomness Quality Analysis</h4>
+                        <p><strong>Category:</strong> Key Quality Assessment</p>
+                        <p><strong>Description:</strong> Tests generated keys against NIST and Diehard randomness test suites.</p>
+                        <p><strong>Tests Performed:</strong></p>
+                        <ul class="feature-list">
+                            <li>Frequency test (monobit)</li>
+                            <li>Runs test (consecutive bits)</li>
+                            <li>Autocorrelation analysis</li>
+                            <li>Entropy calculation</li>
+                            <li>Chi-square goodness-of-fit</li>
+                        </ul>
+                        <p><strong>Output:</strong> NIST compliance report, quality score</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module Architecture -->
+            <section class="architecture-section">
+                <h2>🏗️ Module Architecture</h2>
+                <div class="architecture-content">
+                    <h3>Core Modules</h3>
+                    <ul class="module-list">
+                        <li><strong>bb84_engine.py</strong> - Main BB84 protocol implementation</li>
+                        <li><strong>decoy_bb84.py</strong> - Decoy state enhancement</li>
+                        <li><strong>error_correction.py</strong> - Reconciliation algorithms</li>
+                        <li><strong>privacy_amplification.py</strong> - Key compression techniques</li>
+                        <li><strong>finite_key.py</strong> - Practical security analysis</li>
+                        <li><strong>information_theory.py</strong> - Entropy calculations</li>
+                        <li><strong>channel_model.py</strong> - Quantum channel simulation</li>
+                        <li><strong>attacks.py</strong> - Attack simulation engines</li>
+                        <li><strong>security_analysis.py</strong> - Security metrics</li>
+                        <li><strong>metrics.py</strong> - Performance metrics</li>
+                        <li><strong>secure_communication.py</strong> - AES integration</li>
+                    </ul>
+
+                    <h3>Experiment Modules</h3>
+                    <ul class="module-list">
+                        <li><strong>noise_sweep.py</strong> - Noise analysis experiments</li>
+                        <li><strong>monte_carlo.py</strong> - Statistical simulations</li>
+                        <li><strong>attack_analysis.py</strong> - Attack scenario testing</li>
+                        <li><strong>statistical_analysis.py</strong> - Key quality tests</li>
+                        <li><strong>security_deep_dive.py</strong> - In-depth security analysis</li>
+                        <li><strong>error_correction_demo.py</strong> - Error correction showcase</li>
+                        <li><strong>decoy_state_demo.py</strong> - Decoy state demonstration</li>
+                        <li><strong>privacy_amplification_demo.py</strong> - Key compression demo</li>
+                        <li><strong>secure_communication_demo.py</strong> - End-to-end encryption</li>
+                        <li><strong>advanced_attack_demo.py</strong> - Multi-strategy attacks</li>
+                        <li><strong>randomness_analysis.py</strong> - Randomness quality testing</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>❓ Frequently Asked Questions</h2>
+                <div class="faq-items">
+                    <div class="faq-item">
+                        <h4>What is BB84?</h4>
+                        <p>BB84 is the first quantum key distribution protocol, developed by Bennett and Brassard in 1984. 
+                        It enables two parties to generate identical random keys secure against eavesdropping by leveraging 
+                        the principles of quantum mechanics.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why 16 qubits?</h4>
+                        <p>16 qubits balance practical simulation performance with sufficient complexity to demonstrate 
+                        protocol behavior. This allows experiments to complete in reasonable time on standard computing hardware 
+                        while maintaining scientific accuracy.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What noise model is used?</h4>
+                        <p>The framework uses Qiskit's depolarizing channel, which realistically models quantum channel imperfections 
+                        including spontaneous emission and dephasing effects at 0-20% noise levels.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Can I modify experiments?</h4>
+                        <p>Yes! All experiment source code is available in the <code>experiments/</code> directory. You can fork, 
+                        modify, and extend any experiment to suit your research needs.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How long do experiments run?</h4>
+                        <p>Basic experiments (Noise Sweep, Monte Carlo) typically complete in 30-60 seconds. Advanced experiments 
+                        (Security Deep Dive, Attack Analysis) may take 1-3 minutes depending on system performance.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What are typical secret key rates?</h4>
+                        <p>Under ideal conditions (0% noise), the protocol achieves ~50% of raw generated bits as final secret key. 
+                        Under 10% noise with error correction and privacy amplification, this drops to ~20-30% of raw bits.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 BB84 Adaptive QKD Framework | Quantum Key Distribution Simulation</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

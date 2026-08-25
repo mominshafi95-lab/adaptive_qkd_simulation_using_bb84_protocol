@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration - BB84 Adaptive QKD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">🎛️ Configuration Manager</h1>
+                <p class="subtitle">Customize experiment parameters</p>
+            </div>
+            <nav class="nav">
+                <a href="/" class="nav-link">Experiments</a>
+                <a href="/configuration" class="nav-link active">Configuration</a>
+                <a href="/results" class="nav-link">Results</a>
+                <a href="/documentation" class="nav-link">Documentation</a>
+                <a href="/about" class="nav-link">About</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Quick Presets Section -->
+            <section class="experiment-section">
+                <h2 class="section-title">⚡ Quick Presets</h2>
+                <p style="color: #666; margin-bottom: 20px;">
+                    Apply one of our pre-configured presets to quickly set up experiments
+                </p>
+                <div class="presets-grid" id="presetsContainer">
+                    <div style="text-align: center; padding: 20px;">
+                        <p>Loading presets...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Manual Configuration Section -->
+            <section class="experiment-section">
+                <h2 class="section-title">⚙️ Manual Configuration</h2>
+                <div class="config-form">
+                    <!-- Quantum Settings -->
+                    <div class="config-category">
+                        <h3>🔬 Quantum System</h3>
+                        <div class="form-group">
+                            <label for="numQubits">Number of Qubits (1-20):</label>
+                            <input type="range" id="numQubits" min="1" max="20" value="8" 
+                                   oninput="updateQubitsDisplay(this.value)">
+                            <span id="qubitsDisplay" style="margin-left: 10px; font-weight: bold;">8</span>
+                        </div>
+                    </div>
+
+                    <!-- Noise Settings -->
+                    <div class="config-category">
+                        <h3>📊 Noise Settings</h3>
+                        <div class="form-group">
+                            <label for="minNoise">Minimum Noise (0.0-1.0):</label>
+                            <input type="number" id="minNoise" min="0.0" max="1.0" step="0.01" value="0.0">
+                        </div>
+                        <div class="form-group">
+                            <label for="maxNoise">Maximum Noise (0.0-1.0):</label>
+                            <input type="number" id="maxNoise" min="0.0" max="1.0" step="0.01" value="0.2">
+                        </div>
+                        <div class="form-group">
+                            <label for="noiseLevels">Number of Noise Levels (1-100):</label>
+                            <input type="range" id="noiseLevels" min="1" max="100" value="10"
+                                   oninput="updateNoiseLevelsDisplay(this.value)">
+                            <span id="noiseLevelsDisplay" style="margin-left: 10px; font-weight: bold;">10</span>
+                        </div>
+                    </div>
+
+                    <!-- Simulation Settings -->
+                    <div class="config-category">
+                        <h3>🏃 Simulation Settings</h3>
+                        <div class="form-group">
+                            <label for="mcRuns">Monte Carlo Runs (10-1000):</label>
+                            <input type="range" id="mcRuns" min="10" max="1000" step="10" value="200"
+                                   oninput="updateMcDisplay(this.value)">
+                            <span id="mcDisplay" style="margin-left: 10px; font-weight: bold;">200</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="statRuns">Statistical Runs (10-1000):</label>
+                            <input type="range" id="statRuns" min="10" max="1000" step="10" value="100"
+                                   oninput="updateStatDisplay(this.value)">
+                            <span id="statDisplay" style="margin-left: 10px; font-weight: bold;">100</span>
+                        </div>
+                    </div>
+
+                    <!-- Security Settings -->
+                    <div class="config-category">
+                        <h3>🔐 Security Settings</h3>
+                        <div class="form-group">
+                            <label for="qberThreshold">QBER Threshold (0.01-0.50):</label>
+                            <input type="number" id="qberThreshold" min="0.01" max="0.50" step="0.01" value="0.11">
+                            <small>Default: 0.11 (11%)</small>
+                        </div>
+                    </div>
+
+                    <!-- Attack Settings -->
+                    <div class="config-category">
+                        <h3>⚔️ Attack Simulation</h3>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="enablePNS" checked>
+                            <label for="enablePNS">Enable PNS Attack</label>
+                        </div>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="enableIntercept" checked>
+                            <label for="enableIntercept">Enable Intercept-Resend</label>
+                        </div>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="enableTrojan" checked>
+                            <label for="enableTrojan">Enable Trojan Horse</label>
+                        </div>
+                    </div>
+
+                    <!-- Output Settings -->
+                    <div class="config-category">
+                        <h3>📝 Output Settings</h3>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="verbose" checked>
+                            <label for="verbose">Verbose Output</label>
+                        </div>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="showStats" checked>
+                            <label for="showStats">Show Statistics</label>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="config-actions">
+                        <button class="btn-primary" onclick="applyConfiguration()">
+                            ✓ Apply Configuration
+                        </button>
+                        <button class="btn-secondary" onclick="saveConfigDialog()">
+                            💾 Save Configuration
+                        </button>
+                        <button class="btn-secondary" onclick="loadConfigDialog()">
+                            📂 Load Configuration
+                        </button>
+                        <button class="btn-secondary" onclick="resetConfiguration()">
+                            🔄 Reset to Default
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Current Configuration Section -->
+            <section class="experiment-section">
+                <h2 class="section-title">📋 Current Configuration</h2>
+                <div class="current-config" id="currentConfigDisplay">
+                    <p style="text-align: center;">Loading current configuration...</p>
+                </div>
+            </section>
+
+            <!-- Saved Configurations Section -->
+            <section class="experiment-section">
+                <h2 class="section-title">💾 Saved Configurations</h2>
+                <div class="saved-configs" id="savedConfigsList">
+                    <p style="text-align: center;">Loading saved configurations...</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Message Display -->
+        <div id="messageBox" style="position: fixed; top: 20px; right: 20px; z-index: 1000; display: none;
+                                  padding: 15px 20px; border-radius: 5px; color: white; font-weight: bold;">
+        </div>
+    </div>
+
+    <script>
+        // Load presets on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPresets();
+            loadCurrentConfig();
+            loadSavedConfigs();
+        });
+
+        // Load and display presets
+        function loadPresets() {
+            fetch('/api/config/presets')
+                .then(r => r.json())
+                .then(data => {
+                    const container = document.getElementById('presetsContainer');
+                    container.innerHTML = '';
+                    
+                    data.presets.forEach(preset => {
+                        const div = document.createElement('div');
+                        div.className = 'preset-card';
+                        div.innerHTML = `
+                            <h3>${preset.name}</h3>
+                            <p>${preset.description}</p>
+                            <small>⏱️ ${preset.time}</small>
+                            <button class="btn-run" onclick="applyPreset('${preset.id}')">
+                                Apply Preset
+                            </button>
+                        `;
+                        container.appendChild(div);
+                    });
+                })
+                .catch(err => {
+                    showMessage('Error loading presets: ' + err, 'error');
+                });
+        }
+
+        // Apply preset
+        function applyPreset(presetName) {
+            fetch(`/api/config/preset/${presetName}`, { method: 'POST' })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        showMessage('✓ ' + data.message, 'success');
+                        loadCurrentConfig();
+                    } else {
+                        showMessage('✗ ' + data.error, 'error');
+                    }
+                })
+                .catch(err => {
+                    showMessage('Error applying preset: ' + err, 'error');
+                });
+        }
+
+        // Load current configuration
+        function loadCurrentConfig() {
+            fetch('/api/config/current')
+                .then(r => r.json())
+                .then(data => {
+                    // Update form fields
+                    document.getElementById('numQubits').value = data.quantum.num_qubits;
+                    document.getElementById('qubitsDisplay').textContent = data.quantum.num_qubits;
+                    
+                    document.getElementById('minNoise').value = data.noise.min_noise;
+                    document.getElementById('maxNoise').value = data.noise.max_noise;
+                    document.getElementById('noiseLevels').value = data.noise.noise_levels;
+                    document.getElementById('noiseLevelsDisplay').textContent = data.noise.noise_levels;
+                    
+                    document.getElementById('mcRuns').value = data.simulation.monte_carlo_runs;
+                    document.getElementById('mcDisplay').textContent = data.simulation.monte_carlo_runs;
+                    document.getElementById('statRuns').value = data.simulation.statistical_runs;
+                    document.getElementById('statDisplay').textContent = data.simulation.statistical_runs;
+                    
+                    document.getElementById('qberThreshold').value = data.security.qber_threshold;
+                    
+                    document.getElementById('enablePNS').checked = data.attacks.enable_pns_attack;
+                    document.getElementById('enableIntercept').checked = data.attacks.enable_intercept_resend;
+                    document.getElementById('enableTrojan').checked = data.attacks.enable_trojan_horse;
+                    
+                    document.getElementById('verbose').checked = data.output.verbose;
+                    document.getElementById('showStats').checked = data.output.show_statistics;
+                    
+                    // Display current config
+                    displayCurrentConfig(data);
+                })
+                .catch(err => {
+                    showMessage('Error loading configuration: ' + err, 'error');
+                });
+        }
+
+        // Display current configuration
+        function displayCurrentConfig(config) {
+            const html = `
+                <div class="config-table">
+                    <table>
+                        <tr>
+                            <td><strong>Qubits:</strong></td>
+                            <td>${config.quantum.num_qubits}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Noise Range:</strong></td>
+                            <td>${(config.noise.min_noise*100).toFixed(1)}% - ${(config.noise.max_noise*100).toFixed(1)}%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Noise Levels:</strong></td>
+                            <td>${config.noise.noise_levels}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MC Runs:</strong></td>
+                            <td>${config.simulation.monte_carlo_runs}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Statistical Runs:</strong></td>
+                            <td>${config.simulation.statistical_runs}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>QBER Threshold:</strong></td>
+                            <td>${(config.security.qber_threshold*100).toFixed(2)}%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PNS Attack:</strong></td>
+                            <td>${config.attacks.enable_pns_attack ? '✓ Enabled' : '✗ Disabled'}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Intercept-Resend:</strong></td>
+                            <td>${config.attacks.enable_intercept_resend ? '✓ Enabled' : '✗ Disabled'}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trojan Horse:</strong></td>
+                            <td>${config.attacks.enable_trojan_horse ? '✓ Enabled' : '✗ Disabled'}</td>
+                        </tr>
+                    </table>
+                </div>
+            `;
+            document.getElementById('currentConfigDisplay').innerHTML = html;
+        }
+
+        // Apply custom configuration
+        function applyConfiguration() {
+            const config = {
+                quantum: {
+                    num_qubits: parseInt(document.getElementById('numQubits').value)
+                },
+                noise: {
+                    min_noise: parseFloat(document.getElementById('minNoise').value),
+                    max_noise: parseFloat(document.getElementById('maxNoise').value),
+                    noise_levels: parseInt(document.getElementById('noiseLevels').value)
+                },
+                simulation: {
+                    monte_carlo_runs: parseInt(document.getElementById('mcRuns').value),
+                    statistical_runs: parseInt(document.getElementById('statRuns').value)
+                },
+                security: {
+                    qber_threshold: parseFloat(document.getElementById('qberThreshold').value)
+                },
+                attacks: {
+                    enable_pns_attack: document.getElementById('enablePNS').checked,
+                    enable_intercept_resend: document.getElementById('enableIntercept').checked,
+                    enable_trojan_horse: document.getElementById('enableTrojan').checked
+                },
+                output: {
+                    verbose: document.getElementById('verbose').checked,
+                    show_statistics: document.getElementById('showStats').checked
+                }
+            };
+            
+            fetch('/api/config/update', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(config)
+            })
+            .then(r => r.json())
+            .then(data => {
+                showMessage('✓ Configuration applied successfully!', 'success');
+                loadCurrentConfig();
+            })
+            .catch(err => {
+                showMessage('Error applying configuration: ' + err, 'error');
+            });
+        }
+
+        // Save configuration dialog
+        function saveConfigDialog() {
+            const filename = prompt('Enter configuration filename (without .json):', 'my_config');
+            if (filename) {
+                applyConfiguration();
+                setTimeout(() => {
+                    fetch('/api/config/save', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ filename: filename })
+                    })
+                    .then(r => r.json())
+                    .then(data => {
+                        showMessage('✓ Configuration saved: ' + filename, 'success');
+                        loadSavedConfigs();
+                    })
+                    .catch(err => {
+                        showMessage('Error saving configuration: ' + err, 'error');
+                    });
+                }, 500);
+            }
+        }
+
+        // Load configuration dialog
+        function loadConfigDialog() {
+            fetch('/api/config/list')
+                .then(r => r.json())
+                .then(data => {
+                    if (data.configs.length === 0) {
+                        showMessage('No saved configurations found', 'info');
+                        return;
+                    }
+                    
+                    const options = data.configs.map(c => c.name).join('\n');
+                    const filename = prompt('Enter configuration filename to load:\n\n' + options, '');
+                    
+                    if (filename) {
+                        fetch('/api/config/load', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ filename: filename })
+                        })
+                        .then(r => r.json())
+                        .then(data => {
+                            showMessage('✓ Configuration loaded: ' + filename, 'success');
+                            loadCurrentConfig();
+                        })
+                        .catch(err => {
+                            showMessage('Error loading configuration: ' + err, 'error');
+                        });
+                    }
+                })
+                .catch(err => {
+                    showMessage('Error: ' + err, 'error');
+                });
+        }
+
+        // Load saved configurations
+        function loadSavedConfigs() {
+            fetch('/api/config/list')
+                .then(r => r.json())
+                .then(data => {
+                    const container = document.getElementById('savedConfigsList');
+                    
+                    if (data.configs.length === 0) {
+                        container.innerHTML = '<p style="text-align: center; color: #999;">No saved configurations yet</p>';
+                        return;
+                    }
+                    
+                    let html = '<div class="saved-configs-list">';
+                    data.configs.forEach(config => {
+                        html += `
+                            <div class="config-item">
+                                <div class="config-name">📁 ${config.name}</div>
+                                <div class="config-actions">
+                                    <button class="btn-small" onclick="loadConfiguration('${config.filename}')">Load</button>
+                                    <button class="btn-small delete" onclick="deleteConfiguration('${config.filename}')">Delete</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                    container.innerHTML = html;
+                })
+                .catch(err => {
+                    showMessage('Error loading saved configurations: ' + err, 'error');
+                });
+        }
+
+        // Load specific configuration
+        function loadConfiguration(filename) {
+            fetch('/api/config/load', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ filename: filename })
+            })
+            .then(r => r.json())
+            .then(data => {
+                showMessage('✓ Configuration loaded!', 'success');
+                loadCurrentConfig();
+            })
+            .catch(err => {
+                showMessage('Error loading configuration: ' + err, 'error');
+            });
+        }
+
+        // Delete configuration
+        function deleteConfiguration(filename) {
+            if (confirm(`Delete configuration: ${filename}?`)) {
+                fetch(`/api/config/delete/${filename}`, { method: 'DELETE' })
+                    .then(r => r.json())
+                    .then(data => {
+                        showMessage('✓ Configuration deleted!', 'success');
+                        loadSavedConfigs();
+                    })
+                    .catch(err => {
+                        showMessage('Error deleting configuration: ' + err, 'error');
+                    });
+            }
+        }
+
+        // Reset to default
+        function resetConfiguration() {
+            if (confirm('Reset to default configuration?')) {
+                applyPreset('balanced');
+            }
+        }
+
+        // Update display functions
+        function updateQubitsDisplay(value) {
+            document.getElementById('qubitsDisplay').textContent = value;
+        }
+
+        function updateNoiseLevelsDisplay(value) {
+            document.getElementById('noiseLevelsDisplay').textContent = value;
+        }
+
+        function updateMcDisplay(value) {
+            document.getElementById('mcDisplay').textContent = value;
+        }
+
+        function updateStatDisplay(value) {
+            document.getElementById('statDisplay').textContent = value;
+        }
+
+        // Show message
+        function showMessage(msg, type) {
+            const box = document.getElementById('messageBox');
+            box.textContent = msg;
+            box.style.backgroundColor = type === 'error' ? '#e74c3c' : type === 'success' ? '#27ae60' : '#3498db';
+            box.style.display = 'block';
+            setTimeout(() => {
+                box.style.display = 'none';
+            }, 4000);
+        }
+    </script>
+
+    <style>
+        .config-form {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .config-category {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .config-category:last-child {
+            border-bottom: none;
+        }
+
+        .config-category h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="range"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group input[type="range"] {
+            padding: 0;
+        }
+
+        .form-group.checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .form-group.checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .form-group.checkbox label {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .form-group small {
+            display: block;
+            color: #999;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .config-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn-secondary {
+            background: #2196F3;
+            color: white;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #45a049, #3d8b40);
+        }
+
+        .btn-secondary:hover {
+            background: #0b7dda;
+        }
+
+        .presets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .preset-card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .preset-card:hover {
+            border-color: #4CAF50;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+        }
+
+        .preset-card h3 {
+            margin: 0 0 8px 0;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .preset-card p {
+            font-size: 0.9em;
+            color: #666;
+            margin: 8px 0;
+        }
+
+        .preset-card small {
+            display: block;
+            color: #999;
+            font-size: 0.85em;
+        }
+
+        .btn-run {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .btn-run:hover {
+            background: #45a049;
+        }
+
+        .current-config {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .config-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .config-table tr {
+            border-bottom: 1px solid #eee;
+        }
+
+        .config-table td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        .config-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .saved-configs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .config-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .config-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .config-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 3px;
+            font-size: 0.85em;
+            cursor: pointer;
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-small.delete {
+            background: #f44336;
+        }
+
+        .btn-small:hover {
+            opacity: 0.8;
+        }
+    </style>
+</body>
+</html>
